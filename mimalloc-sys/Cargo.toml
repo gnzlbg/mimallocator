@@ -1,6 +1,6 @@
 [package]
 name = "mimalloc-sys"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["gnzlbg <gonzalobg88@gmail.com>"]
 edition = "2018"
 build = "build.rs"
@@ -10,6 +10,7 @@ repository = "https://github.com/gnzlbg/mimallocator"
 homepage = "https://github.com/gnzlbg/mimallocator"
 documentation = "https://docs.rs/mimalloc-sys"
 keywords = ["allocator", "mimalloc"]
+categories = ["memory-management", "api-bindings"]
 description = """
 Rust FFI bindings to mimalloc
 """

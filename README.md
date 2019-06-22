@@ -1,7 +1,7 @@
-A Rust global allocator using mimalloc
+A Rust allocator backed by mimalloc
 ===
 
-This crates provides a Rust `#[global_allocator]` built on top of [`mimalloc`].
+This crates provides a Rust `#[global_allocator]` backed by [`mimalloc`].
 
 See also the [`mimalloc-sys`] crate providing raw FFI bindings to [`mimalloc`].
 
