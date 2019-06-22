@@ -3,7 +3,28 @@ name = "mimalloc-sys"
 version = "0.1.0"
 authors = ["gnzlbg <gonzalobg88@gmail.com>"]
 edition = "2018"
+build = "build.rs"
+links = "mimalloc"
+license = "MIT/Apache-2.0"
+repository = "https://github.com/gnzlbg/mimallocator"
+homepage = "https://github.com/gnzlbg/mimallocator"
+documentation = "https://docs.rs/mimalloc-sys"
+keywords = ["allocator", "mimalloc"]
+description = """
+Rust FFI bindings to mimalloc
+"""
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[badges]
+appveyor = { repository = "gnzlbg/mimallocator" }
+travis-ci = { repository = "gnzlbg/mimallocator" }
+codecov = { repository = "gnzlbg/mimallocator" }
+is-it-maintained-issue-resolution = { repository = "gnzlbg/mimallocator" }
+is-it-maintained-open-issues = { repository = "gnzlbg/mimallocator" }
+maintenance = { status = "actively-developed" }
 
 [dependencies]
+libc = "0.2"
+
+[build-dependencies]
+cmake = "0.1"
+fs_extra = "^1.1"
