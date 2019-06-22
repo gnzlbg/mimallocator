@@ -110,7 +110,7 @@ dependencies = [
 
 [[package]]
 name = "mimalloc-sys"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "cmake 0.1.40 (registry+https://github.com/rust-lang/crates.io-index)",
  "fs_extra 1.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -123,7 +123,7 @@ version = "0.1.0"
 dependencies = [
  "ctest 0.2.14 (registry+https://github.com/rust-lang/crates.io-index)",
  "libc 0.2.58 (registry+https://github.com/rust-lang/crates.io-index)",
- "mimalloc-sys 0.1.0",
+ "mimalloc-sys 0.1.1",
 ]
 
 [[package]]

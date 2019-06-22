@@ -12,9 +12,8 @@ fn main() {
     let host = env::var("HOST").expect("HOST was not set");
     let profile = env::var("PROFILE").expect("PROFILE was not set");
     let num_jobs = env::var("NUM_JOBS").expect("NUM_JOBS was not set");
-    let out_dir = PathBuf::from(
-        env::var_os("OUT_DIR").expect("OUT_DIR was not set")
-    );
+    let out_dir =
+        PathBuf::from(env::var_os("OUT_DIR").expect("OUT_DIR was not set"));
     let src_dir = env::current_dir().expect("failed to get current directory");
     let build_dir = out_dir.join("build");
     let mimalloc_src_dir = src_dir.join("mimalloc");
@@ -43,14 +42,16 @@ fn main() {
     copy_options.overwrite = true;
     copy_options.copy_inside = true;
     fs_extra::dir::copy(
-        &mimalloc_src_dir, &mimalloc_out_src_dir, &copy_options
-    ).expect("failed to copy jemalloc source code to OUT_DIR");
+        &mimalloc_src_dir,
+        &mimalloc_out_src_dir,
+        &copy_options,
+    )
+    .expect("failed to copy jemalloc source code to OUT_DIR");
     assert!(mimalloc_out_src_dir.exists());
-
 
     // Build mimalloc
     let dst = cmake::Config::new(mimalloc_out_src_dir)
-        .define("OVERRIDE","OFF")
+        .define("OVERRIDE", "OFF")
         .build();
 
     println!("cargo:rustc-link-search=native={}/lib", dst.display());

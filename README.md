@@ -1,6 +1,8 @@
 A Rust allocator backed by mimalloc
 ===
 
+[![Travis-CI Status]][travis]
+
 This crates provides a Rust `#[global_allocator]` backed by [`mimalloc`].
 
 See also the [`mimalloc-sys`] crate providing raw FFI bindings to [`mimalloc`].
@@ -24,3 +26,5 @@ shall be dual licensed as above, without any additional terms or conditions.
 
 [`mimalloc-sys`]: https://crates.io/crates/mimalloc-sys
 [`mimalloc`]: https://github.com/microsoft/mimalloc
+[travis]: https://travis-ci.com/gnzlbg/mimallocator
+[Travis-CI Status]: https://travis-ci.com/gnzlbg/mimallocator.svg?branch=master

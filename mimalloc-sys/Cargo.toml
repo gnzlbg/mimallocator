@@ -16,9 +16,7 @@ Rust FFI bindings to mimalloc
 """
 
 [badges]
-appveyor = { repository = "gnzlbg/mimallocator" }
 travis-ci = { repository = "gnzlbg/mimallocator" }
-codecov = { repository = "gnzlbg/mimallocator" }
 is-it-maintained-issue-resolution = { repository = "gnzlbg/mimallocator" }
 is-it-maintained-open-issues = { repository = "gnzlbg/mimallocator" }
 maintenance = { status = "actively-developed" }

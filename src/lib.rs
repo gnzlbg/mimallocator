@@ -1,5 +1,5 @@
 #![no_std]
-use core::alloc::{Layout, GlobalAlloc};
+use core::alloc::{GlobalAlloc, Layout};
 
 #[derive(Copy, Clone, Default, Debug)]
 pub struct Mimalloc;
@@ -8,7 +8,8 @@ unsafe impl GlobalAlloc for Mimalloc {
     #[inline]
     unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
         let ptr = mimalloc_sys::mi_malloc_aligned(
-            layout.size() as _, layout.align() as _
+            layout.size() as _,
+            layout.align() as _,
         );
         ptr as *mut u8
     }

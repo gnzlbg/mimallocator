@@ -19,7 +19,8 @@ fn overaligned() {
     unsafe {
         let pointers: Vec<_> = (0..iterations)
             .map(|_| {
-                let ptr = Mimalloc.alloc(Layout::from_size_align(size, align).unwrap());
+                let ptr = Mimalloc
+                    .alloc(Layout::from_size_align(size, align).unwrap());
                 assert!(!ptr.is_null());
                 ptr
             })
@@ -34,7 +35,8 @@ fn overaligned() {
 
         // Clean up
         for &ptr in &pointers {
-            Mimalloc.dealloc(ptr, Layout::from_size_align(size, align).unwrap())
+            Mimalloc
+                .dealloc(ptr, Layout::from_size_align(size, align).unwrap())
         }
     }
 }

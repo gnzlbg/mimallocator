@@ -13,5 +13,11 @@ description = """
 A Rust allocator backed by mimalloc
 """
 
+[badges]
+travis-ci = { repository = "gnzlbg/mimallocator" }
+is-it-maintained-issue-resolution = { repository = "gnzlbg/mimallocator" }
+is-it-maintained-open-issues = { repository = "gnzlbg/mimallocator" }
+maintenance = { status = "actively-developed" }
+
 [dependencies]
 mimalloc-sys = { version = "0.1", path = "mimalloc-sys" }

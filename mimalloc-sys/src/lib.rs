@@ -1,6 +1,6 @@
 //! Raw FFI wrapper over the mimalloc memory allocator
 #![no_std]
-use libc::{size_t, c_void};
+use libc::{c_void, size_t};
 
 extern "C" {
     pub fn mi_malloc(size: size_t) -> *mut c_void;
