@@ -13,7 +13,5 @@ description = """
 A Rust allocator backed by mimalloc
 """
 
-
-
 [dependencies]
-mimalloc-sys = { path = "mimalloc-sys" }
+mimalloc-sys = { version = "0.1", path = "mimalloc-sys" }
