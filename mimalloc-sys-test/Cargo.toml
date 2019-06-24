@@ -3,7 +3,6 @@ name = "mimalloc-sys-test"
 version = "0.1.0"
 authors = ["gnzlbg <gonzalobg88@gmail.com>"]
 edition = "2015"
-build = "build.rs"
 
 [dependencies]
 mimalloc-sys = { path = "../mimalloc-sys" }
@@ -11,8 +10,3 @@ libc = "0.2"
 
 [build-dependencies]
 ctest = "0.2"
-
-[[test]]
-name = "main"
-path = "test/main.rs"
-harness = false
