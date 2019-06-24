@@ -45,6 +45,7 @@ fn overaligned() {
 fn smoke_ffi() {
     unsafe {
         let ptr = mimalloc_sys::mi_malloc(4);
+        assert!(!ptr.is_null());
         *(ptr as *mut u32) = 0xDECADE;
         assert_eq!(*(ptr as *mut u32), 0xDECADE);
         mimalloc_sys::mi_free(ptr);
