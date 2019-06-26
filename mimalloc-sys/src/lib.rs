@@ -18,5 +18,5 @@ extern "C" {
 
     pub fn mi_free(p: *mut c_void);
 
-    pub fn mi_usable_size(p: *const c_void) -> size_t;
+    pub fn mi_usable_size(p: *mut c_void) -> size_t;
 }
