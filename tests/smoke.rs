@@ -50,3 +50,15 @@ fn smoke_ffi() {
         mimalloc_sys::mi_free(ptr);
     }
 }
+
+#[test]
+fn smoke_usable_size() {
+    let a = vec![0u8; 32];
+    let usable_size = unsafe {
+        mimallocator::usable_size(a.as_slice().as_ptr())
+    };
+    assert!(
+        usable_size >= 32,
+        "usable_size should at least equal to the allocated size"
+    );
+}
