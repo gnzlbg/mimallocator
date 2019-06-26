@@ -85,7 +85,6 @@ unsafe impl GlobalAlloc for Mimalloc {
     }
 }
 
-
 /// Returns the available bytes in the memory block, or 0 if `ptr` was NULL.
 ///
 /// The returned size is always at least equal to the allocated size of `ptr`,
