@@ -95,5 +95,5 @@ unsafe impl GlobalAlloc for Mimalloc {
 ///
 /// `ptr` must have been allocated by `mimalloc` and must not have been freed yet.
 pub unsafe fn usable_size<T>(ptr: *const T) -> usize {
-    mimalloc_sys::mi_usable_size(ptr as *const c_void)
+    mimalloc_sys::mi_usable_size(ptr as *const _)
 }
