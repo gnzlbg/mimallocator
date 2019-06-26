@@ -23,6 +23,7 @@ is-it-maintained-open-issues = { repository = "gnzlbg/mimallocator" }
 maintenance = { status = "actively-developed" }
 
 [features]
+default = []
 secure = ["mimalloc-sys/secure"]
 check_full = ["mimalloc-sys/check_full"]
 stats = ["mimalloc-sys/stats"]

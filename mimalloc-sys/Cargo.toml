@@ -22,6 +22,7 @@ is-it-maintained-open-issues = { repository = "gnzlbg/mimallocator" }
 maintenance = { status = "actively-developed" }
 
 [features]
+default = []
 secure = []
 check_full = []
 stats = []
