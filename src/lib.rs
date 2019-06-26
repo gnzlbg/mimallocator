@@ -84,3 +84,16 @@ unsafe impl GlobalAlloc for Mimalloc {
         ptr as *mut u8
     }
 }
+
+
+/// Returns the available bytes in the memory block, or 0 if `ptr` was NULL.
+///
+/// The returned size is always at least equal to the allocated size of `ptr`,
+/// and, in the current design, should be less than 16.7% more.
+///
+/// # Unsafety
+///
+/// `ptr` must have been allocated by `mimalloc` and must not have been freed yet.
+pub unsafe fn usable_size<T>(ptr: *const T) -> usize {
+    mimalloc_sys::mi_usable_size(ptr as *const c_void)
+}
