@@ -2,6 +2,8 @@
 
 set -ex
 
+: "${TARGET?The TARGET environment variable must be set.}"
+
 export MIMALLOC_SYS_ENABLE_WARNINGS=1
 
 # Build mimalloc-sys
