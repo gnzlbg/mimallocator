@@ -35,7 +35,7 @@ fn main() {
     build.flag(if gnu || clang {
         "-std=gnu11"
     } else {
-        "/std::c++11"
+        "/std:c++11"
     });
 
     if clang || gnu {
