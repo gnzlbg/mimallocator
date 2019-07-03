@@ -27,4 +27,7 @@ cargo test --release --features secure,check_full,stats
     cd mimalloc-sys-test
     cargo run
     cargo run --release
+    cargo run --features override
+    cargo run --release --features override
+
 )
