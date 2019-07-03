@@ -73,7 +73,8 @@ fn main() {
 
     if profile == "release" {
         build.define("NDEBUG", None);
-        build.flag_if_supported("-flto");
+        // FIXME:
+        // build.flag_if_supported("-flto");
     }
 
     if stats {

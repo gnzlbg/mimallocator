@@ -10,7 +10,7 @@ use core::alloc::{GlobalAlloc, Layout};
     target_arch = "asmjs",
     target_arch = "wasm32"
 )))]
-const max_align_t: usize = 8;
+const MAX_ALIGN_T: usize = 8;
 #[cfg(all(any(
     target_arch = "x86_64",
     target_arch = "aarch64",
@@ -18,23 +18,24 @@ const max_align_t: usize = 8;
     target_arch = "s390x",
     target_arch = "sparc64"
 )))]
-const max_align_t: usize = 16;
+const MAX_ALIGN_T: usize = 16;
 
 #[derive(Copy, Clone, Default, Debug)]
 pub struct Mimalloc;
 
+fn fundamental_alignment(size: usize, align: usize) -> bool {
+    align <= MAX_ALIGN_T && align <= size
+}
+
 unsafe impl GlobalAlloc for Mimalloc {
     #[inline]
     unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
-        let ptr = if layout.align() <= max_align_t
-            && layout.align() <= layout.size()
-        {
-            mimalloc_sys::mi_malloc(layout.size() as _)
+        let size = layout.size();
+        let align = layout.align();
+        let ptr = if fundamental_alignment(size, align) {
+            mimalloc_sys::mi_malloc(size as _)
         } else {
-            mimalloc_sys::mi_malloc_aligned(
-                layout.size() as _,
-                layout.align() as _,
-            )
+            mimalloc_sys::mi_malloc_aligned(size as _, align as _)
         };
 
         ptr as *mut u8
@@ -42,15 +43,12 @@ unsafe impl GlobalAlloc for Mimalloc {
 
     #[inline]
     unsafe fn alloc_zeroed(&self, layout: Layout) -> *mut u8 {
-        let ptr = if layout.align() <= max_align_t
-            && layout.align() <= layout.size()
-        {
-            mimalloc_sys::mi_zalloc(layout.size() as _)
+        let size = layout.size();
+        let align = layout.align();
+        let ptr = if fundamental_alignment(size, align) {
+            mimalloc_sys::mi_zalloc(size as _)
         } else {
-            mimalloc_sys::mi_zalloc_aligned(
-                layout.size() as _,
-                layout.align() as _,
-            )
+            mimalloc_sys::mi_zalloc_aligned(size as _, align as _)
         };
 
         ptr as *mut u8
@@ -68,30 +66,14 @@ unsafe impl GlobalAlloc for Mimalloc {
         layout: Layout,
         new_size: usize,
     ) -> *mut u8 {
-        let ptr = if layout.align() <= max_align_t
-            && layout.align() <= layout.size()
-        {
+        let size = layout.size();
+        let align = layout.align();
+        let ptr = if fundamental_alignment(size, align) {
             mimalloc_sys::mi_realloc(ptr as *mut _, new_size)
         } else {
-            mimalloc_sys::mi_realloc_aligned(
-                ptr as *mut _,
-                new_size,
-                layout.align() as _,
-            )
+            mimalloc_sys::mi_realloc_aligned(ptr as *mut _, new_size, align)
         };
 
         ptr as *mut u8
     }
-}
-
-/// Returns the available bytes in the memory block, or 0 if `ptr` was NULL.
-///
-/// The returned size is always at least equal to the allocated size of `ptr`,
-/// and, in the current design, should be less than 16.7% more.
-///
-/// # Unsafety
-///
-/// `ptr` must have been allocated by `mimalloc` and must not have been freed yet.
-pub unsafe fn usable_size<T>(ptr: *const T) -> usize {
-    mimalloc_sys::mi_usable_size(ptr as *mut _)
 }
