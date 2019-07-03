@@ -20,4 +20,4 @@ matrix:
       os: osx
       osx_image: xcode10
 
-script: sh ci/run.sh
+script: sh ci/run.sh $TARGET
