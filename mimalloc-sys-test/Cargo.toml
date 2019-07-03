@@ -11,3 +11,7 @@ libc = "0.2"
 
 [build-dependencies]
 ctest = "0.2"
+
+[features]
+default = []
+override = [ "mimalloc-sys/override" ]
