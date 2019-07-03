@@ -21,9 +21,14 @@ is-it-maintained-issue-resolution = { repository = "gnzlbg/mimallocator" }
 is-it-maintained-open-issues = { repository = "gnzlbg/mimallocator" }
 maintenance = { status = "actively-developed" }
 
+[features]
+default = []
+secure = []
+check_full = []
+stats = []
+
 [dependencies]
 libc = "0.2"
 
 [build-dependencies]
-cmake = "0.1"
-fs_extra = "^1.1"
+cc = "1.0"

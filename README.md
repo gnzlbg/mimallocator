@@ -7,6 +7,32 @@ This crates provides a Rust `#[global_allocator]` backed by [`mimalloc`].
 
 See also the [`mimalloc-sys`] crate providing raw FFI bindings to [`mimalloc`].
 
+## Usage
+
+```toml
+# Cargo.toml
+[dependencies]
+mimallocator = "0.1" 
+```
+
+```rust
+// main.rs
+#[global_allocator]
+static GLOBAL: mimallocator::Mimalloc = mimallocator::Mimalloc;
+```
+
+The [`mimalloc`] CMake configuration is exposed with these features
+
+- __stats__: Print statistics at program exit
+- __secure__: Build in secure mode
+- __check_full__: Enable full internal checks and asserts
+
+```toml
+# Cargo.toml
+[dependencies]
+mimallocator = { version = "0.1", features = ["secure", "stats", "check_full"] }
+```
+
 ## License
 
 This project is licensed under either of

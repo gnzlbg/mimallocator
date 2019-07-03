@@ -11,8 +11,3 @@ libc = "0.2"
 
 [build-dependencies]
 ctest = "0.2"
-
-[[test]]
-name = "main"
-path = "test/main.rs"
-harness = false

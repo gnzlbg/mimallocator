@@ -13,11 +13,20 @@ description = """
 A Rust allocator backed by mimalloc
 """
 
+[workspace]
+members = ['mimalloc-sys-test']
+
 [badges]
 travis-ci = { repository = "gnzlbg/mimallocator" }
 is-it-maintained-issue-resolution = { repository = "gnzlbg/mimallocator" }
 is-it-maintained-open-issues = { repository = "gnzlbg/mimallocator" }
 maintenance = { status = "actively-developed" }
+
+[features]
+default = []
+secure = ["mimalloc-sys/secure"]
+check_full = ["mimalloc-sys/check_full"]
+stats = ["mimalloc-sys/stats"]
 
 [dependencies]
 mimalloc-sys = { version = "0.1", path = "mimalloc-sys" }

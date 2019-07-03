@@ -13,7 +13,11 @@ The documentation of the FFI bindings can be found in [docs.rs].
 
 ## Cargo features
 
-* `secure`.`
+The [`mimalloc`] CMake configuration is exposed with these features
+
+- __stats__: Print statistics at program exit
+- __secure__: Build in secure mode
+- __check_full__: Enable full internal checks and asserts
 
 ## Platform support
 
