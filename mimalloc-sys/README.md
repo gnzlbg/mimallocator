@@ -18,6 +18,7 @@ The [`mimalloc`] CMake configuration is exposed with these features
 - __stats__: Print statistics at program exit
 - __secure__: Build in secure mode
 - __check_full__: Enable full internal checks and asserts
+- __override__: Overrides the `malloc` symbols with `mimalloc` symbols.
 
 ## Platform support
 

@@ -1,12 +1,16 @@
-#!/usr/bin/sh
+#!/usr/bin/env sh
 
 set -ex
+
+export MIMALLOC_SYS_ENABLE_WARNINGS=1
 
 # Build mimalloc-sys
 (
     cd mimalloc-sys
-    cargo build
-    cargo build --release
+    cargo test
+    cargo test --features override
+    cargo test --release
+    cargo test --release --features override
 )
 
 # Test mimallocator

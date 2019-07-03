@@ -15,5 +15,9 @@ matrix:
     - name: "x86_64-pc-windows-msvc"
       env: TARGET=x86_64-pc-windows-msvc
       os: windows
+    - name: "i686-apple-darwin"
+      env: TARGET=i686-apple-darwin
+      os: osx
+      osx_image: xcode10
 
 script: sh ci/run.sh
