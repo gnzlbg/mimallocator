@@ -8,9 +8,16 @@ export MIMALLOC_SYS_ENABLE_WARNINGS=1
 (
     cd mimalloc-sys
     cargo test
-    cargo test --features override
     cargo test --release
-    cargo test --release --features override
+    case $TARGET in
+        *window*)
+            echo "Override not available on Windows"
+            ;;
+        *)
+            cargo test --features override
+            cargo test --release --features override
+            ;;
+    esac
 )
 
 # Test mimallocator
@@ -27,7 +34,14 @@ cargo test --release --features secure,check_full,stats
     cd mimalloc-sys-test
     cargo run
     cargo run --release
-    cargo run --features override
-    cargo run --release --features override
+    case $TARGET in
+        *window*)
+            echo "Override not available on Windows"
+            ;;
+        *)
+            cargo run --features override
+            cargo run --release --features override
+            ;;
+    esac
 
 )
