@@ -1,6 +1,8 @@
 //! Raw FFI wrapper over the mimalloc memory allocator
 #![no_std]
 use libc::{c_void, size_t, FILE};
+#[cfg(feature = "override")]
+use libc::{c_int};
 
 extern "C" {
     // Standard malloc interface
@@ -35,4 +37,15 @@ extern "C" {
         newsize: size_t,
         alignment: size_t,
     ) -> *mut c_void;
+}
+
+#[cfg(feature = "override")]
+extern "C" {
+    // When the override feature is enabled, we also expose the standard C API here.
+    pub fn malloc(size: size_t) -> *mut c_void;
+    pub fn calloc(count: size_t, size: size_t) -> *mut c_void;
+    pub fn realloc(p: *mut c_void, newsize: size_t) -> *mut c_void;
+    pub fn free(p: *mut c_void);
+    pub fn posix_memalign(ptr: *mut *mut c_void, alignment: size_t, size: size_t) -> c_int;
+    pub fn aligned_alloc(alignment: size_t, size: size_t) -> *mut c_void;
 }
