@@ -80,7 +80,7 @@ fn main() {
     // enabled, so we always disable it unless it is
     // explicitly requested.
     if !verbose {
-        build.define("MIMALLOC_VERBOSE", "0");
+        build.define("MI_VERBOSE", "0");
     }
 
     if profile == "release" {
