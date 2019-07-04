@@ -5,12 +5,14 @@ use std::env;
 
 fn main() {
     // Get environment variables:
-    // let target = env::var("TARGET").expect("TARGET was not set");
+    let target = env::var("TARGET").expect("TARGET was not set");
     let secure = env::var_os("CARGO_FEATURE_SECURE").is_some();
     let check_full = env::var_os("CARGO_FEATURE_CHECK_FULL").is_some();
     let stats = env::var_os("CARGO_FEATURE_STATS").is_some();
     let override_ = env::var_os("CARGO_FEATURE_OVERRIDE").is_some();
+    let verbose = env::var_os("CARGO_FEATURE_VERBOSE").is_some();
     let warnings = env::var_os("MIMALLOC_SYS_ENABLE_WARNINGS").is_some();
+
     let profile = env::var("PROFILE").unwrap_or(String::new());
 
     // Build mimalloc
@@ -61,6 +63,10 @@ fn main() {
     // Overrides malloc with mimalloc
     if override_ {
         build.define("MI_MALLOC_OVERRIDE", None);
+        // On MacOSX this is required to override the system allocator:
+        if target.contains("apple") {
+            build.define("MI_INTERPOSE", None);
+        }
     }
 
     // Enable debug and secure in for debug builds, or when the cargo flag is active:
@@ -70,11 +76,24 @@ fn main() {
     if secure || profile == "debug" {
         build.define("MI_SECURE", "2");
     }
+    // Verbose is enabled by default if MI_DEBUG is
+    // enabled, so we always disable it unless it is
+    // explicitly requested.
+    if !verbose {
+        build.define("MIMALLOC_VERBOSE", "0");
+    }
 
     if profile == "release" {
         build.define("NDEBUG", None);
+        build.flag_if_supported("-O3");
+        build.flag_if_supported("-fstrict-aliasing");
+        build.flag_if_supported("-g0");
         // FIXME:
         // build.flag_if_supported("-flto");
+    }
+    if profile == "debug" {
+        build.flag_if_supported("-fstack-protector-all");
+        build.flag_if_supported("-fno-strict-aliasing");
     }
 
     if stats {
