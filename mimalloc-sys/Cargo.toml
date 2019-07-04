@@ -27,6 +27,7 @@ secure = []
 check_full = []
 stats = []
 override = []
+verbose = []
 
 [dependencies]
 libc = "0.2"
