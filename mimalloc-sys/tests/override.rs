@@ -4,6 +4,7 @@
 use libc::{c_void, size_t};
 use mimalloc_sys::*;
 
+#[cfg(not(teature = "override"))]
 extern "C" {
     pub fn malloc(size: size_t) -> *mut c_void;
     pub fn realloc(p: *mut c_void, newsize: size_t) -> *mut c_void;
@@ -69,3 +70,18 @@ fn mi_malloc_realloc_mi_free() {
         });
     }
 }
+
+/*
+#[test]
+#[cfg(feature = "override")]
+fn overriden_fn_ptrs() {
+    assert_eq!(mi_malloc as usize, malloc as usize);
+    assert_eq!(mi_calloc as usize, calloc as usize);
+    assert_eq!(mi_realloc as usize, realloc as usize);
+    assert_eq!(mi_free as usize, free as usize);
+    assert_eq!(mi_posix_memalign as usize, posix_memalign as usize);
+    assert_eq!(mi_aligned_alloc as usize, aligned_alloc as usize);
+    assert_eq!(mi_malloc_size as usize, malloc_size as usize);
+    assert_eq!(mi_malloc_usable_size as usize, malloc_usable_size as usize);
+}
+*/
