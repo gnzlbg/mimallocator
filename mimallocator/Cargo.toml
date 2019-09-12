@@ -26,4 +26,4 @@ check_full = ["mimalloc-sys/check_full"]
 stats = ["mimalloc-sys/stats"]
 
 [dependencies]
-mimalloc-sys = { version = "0.1", path = "../mimalloc-sys" }
+mimalloc-sys = { path = "../mimalloc-sys" }
